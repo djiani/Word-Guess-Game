@@ -7,8 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/stylesheet" href="assets/css/style.css">
-    <script  type="text/javascript" src="assets/javascript/game.js"></script>
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
     <title>World Guess Game</title>
 </head>
 
@@ -16,7 +19,7 @@
 
     <div class="jumbotron">
         <div class="container text-center">
-            <h1 class="display-4">world Guess Game</h1>
+            <h1 class="display-4">World Guess Game</h1>
             <p class="lead">
                 bref description about the world guess game here ....!!
             </p>
@@ -26,22 +29,55 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-12 col-sm-6 border border-dark border-lg">
-                <div class="row box image">Images</div>
-                <div class="row box img-desc">descriptions</div>
+                <div class="card box-image m-2">
+                    <img class="card-img-top" src="assets/images/questionMark.jpg" alt="Card image">
+                    <div class="card-body">
+                        <h4 class="card-title">Description</h4>
+                        <p class="card-text desc">Some example text.</p>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-sm-6 border border-dark border-lg">
-                <div class="row">
-                    <p>Pressed Any Key to get Started</p>
-                </div>
-                <div class="row">
-                    <div class="card">Total Wins: <span class="totalWins"></span></div>
-                    <div class="card">Current World</div>
-                    <div class="card"><span class="currentWord">--------</span></div>
-                    <div class="card">Number of Guesses Remaining: <span class="TotalGuessRemaining"></span></div>
-                    <div class="card">Letters Already Guessed</div>
-                    <div class="card" class="lettersAlreadyGuessed">----</div>
+                    <div class="card bg-default mt-2">
+                            <div class="card-body">
+                               <h3 class="startGame">Pressed 
+                                    <span class="badge badge-info"> Enter </span>
+                                    to Start the game</h3> 
+                            </div>
+                        </div>
+                <hr>
+                
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">Total Wins:
+                            <span class="badge badge-success totalWins"> 0 </span>
+                        </div>
+                    </div>
+                    <br/>
+                    <h3>Current World</h3>
 
-                </div>
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <span class="badge badge-success currentWord">--------- </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                    Number of Guesses Remaining:
+                                <span class="badge badge-danger TotalGuessRemaining"> 0 </span>
+                            </div>
+                        </div>
+                        <br>
+                    <h3> Letters Already Guessed</h3>
+                    <hr>
+                    <br>
+                    <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <span class="badge badge-success LetterAlGuessed">--------- </span>
+                            </div>
+                        </div>
+
+            
 
 
             </div>
