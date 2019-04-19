@@ -12,7 +12,7 @@ $(document).ready(function () {
     document.onkeyup = (function (event) {
         if(event.key === "Enter"){
             $('.startGame').text("Game on!");
-            $('.startGame').after(`<p>could you guessed the word below?</p>`);
+            $('.startGameDesc').startGameDesc(`could you guessed the word below?`);
             let currentObject = ListGame[Math.floor(Math.random() * ListGame.length)];
             $(".card-img-top").attr("src", "assets/images/" + currentObject.img);
             $(".desc").html(currentObject.desc);
