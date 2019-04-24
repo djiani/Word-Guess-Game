@@ -61,6 +61,15 @@ $(document).ready(function () {
         return dashCount;
     }
 
+    function dashCount(str){
+        let strmatch =  str.match(/-/g)
+        if(strmatch === null){
+            return 0
+        }else{
+            return strmatch.length;
+        }
+    }
+
 
     document.onkeyup = (function (event) {
         if (event.key === "Enter" && !isGameStarted) {
@@ -104,6 +113,9 @@ $(document).ready(function () {
 
                     }
                 }
+            }else{
+                //losses
+                
             }
 
 
