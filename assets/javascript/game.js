@@ -116,6 +116,7 @@ $(document).ready(function () {
                         //play sound
                         isGameStarted = false;
                         GameInitialization();
+                        console.log('game wins...');
                     }
                 } else {
                     if (!letterAlreadyGuess.includes(userGuess)) {
