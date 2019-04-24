@@ -43,12 +43,13 @@ $(document).ready(function () {
     ];
 
     let currentObject = {};
-    let isGameStarted = false;
+    let isGameStarted = true;
     let numGuessRem = 0;
     let displayWordToGuess = "";
     let wordToGuess = "";
     let userGuess = '';
     let totalWins = 0;
+    let totalLoses = 0;
     let letterAlreadyGuess = [];
 
     function playGame(str) {
@@ -61,66 +62,78 @@ $(document).ready(function () {
         return dashCount;
     }
 
-    function dashCount(str){
-        let strmatch =  str.match(/-/g)
-        if(strmatch === null){
+    function dashCount(str) {
+        let strmatch = str.match(/-/g)
+        if (strmatch === null) {
             return 0
-        }else{
+        } else {
             return strmatch.length;
         }
     }
 
+    function displayString(str){
+        let dispStr= "";
+        for(let i=0; i<str.length; i++){
+            dispStr += str[i]+" ";
+        }
+        return dispStr;
+    }
+
+    function GameInitialization() {
+        numGuessRem = 0;
+        displayWordToGuess = "";
+        wordToGuess = "";
+        letterAlreadyGuess = [];
+        $('.startGame').text("Game on!");
+        $('.startGameDesc').text(`Could you guessed the word below?`);
+        let currentObject = ListGame[Math.floor(Math.random() * ListGame.length)];
+        $(".card-img-top").attr("src", "assets/images/" + currentObject.img);
+        $(".desc").html(currentObject.desc);
+        wordToGuess = currentObject.wordToGuess;
+        displayWordToGuess = printWordToGuess(displayWordToGuess, wordToGuess, '');
+        $(".currentWord").html(displayString(displayWordToGuess));
+        numGuessRem = wordToGuess.length + 5;
+        $(".TotalGuessRemaining").text(numGuessRem);
+        $(".LetterAlGuessed").text("-")
+    }
 
     document.onkeyup = (function (event) {
-        if (event.key === "Enter" && !isGameStarted) {
-            //Game initialization
-            isGameStarted = true;
-            numGuessRem = 0;
-            displayWordToGuess = "";
-            wordToGuess = "";
-            letterAlreadyGuess = [];
-            $('.startGame').text("Game on!");
-            $('.startGameDesc').text(`could you guessed the word below?`);
-            let currentObject = ListGame[Math.floor(Math.random() * ListGame.length)];
-            $(".card-img-top").attr("src", "assets/images/" + currentObject.img);
-            $(".desc").html(currentObject.desc);
-            wordToGuess = currentObject.wordToGuess;
-            displayWordToGuess = printWordToGuess(displayWordToGuess, wordToGuess, '');
-            $(".currentWord").html(displayWordToGuess);
-            numGuessRem = wordToGuess.length + 5;
-            $(".TotalGuessRemaining").text(numGuessRem);
+        if (isGameStarted) {
+            // first Game initialization
+            isGameStarted = false;
+            GameInitialization();
         }
-        else if (isGameStarted) {
-            //collected user input and implement the core logic of the game here!
+        else
             if (numGuessRem > 0 && dashCount(displayWordToGuess) > 0) {
                 console.log(event.key);
                 userGuess = event.key;
                 if (wordToGuess.includes(userGuess)) {
                     displayWordToGuess = printWordToGuess(displayWordToGuess, wordToGuess, userGuess);
-                    $(".currentWord").html(displayWordToGuess);
-                    if (dashCount(displayWordToGuess) === 0){
+                    $(".currentWord").html(displayString(displayWordToGuess));
+                    if (dashCount(displayWordToGuess) === 0) {
                         totalWins++;
                         $('.totalWins').text(totalWins);
                         //play sound
                         isGameStarted = false;
+                        GameInitialization();
                     }
                 } else {
                     if (!letterAlreadyGuess.includes(userGuess)) {
                         numGuessRem--;
                         letterAlreadyGuess.push(userGuess);
                         $(".TotalGuessRemaining").text(numGuessRem);
-                        $(".LetterAlGuessed").text(letterAlreadyGuess.map(function (letter) { return `${letter} ` }));
+                        $(".LetterAlGuessed").text(letterAlreadyGuess.map(function (letter) { return ` ${letter}  ` }));
 
                     }
                 }
-            }else{
+            } else {
                 //losses
-                
+                totalLoses++;
+                $('.totalLoses').text(totalLoses);
+                isGameStarted = false;
+                GameInitialization();
+
             }
-
-
-
-        }
 
     });
 
